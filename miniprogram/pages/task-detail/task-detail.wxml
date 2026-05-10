@@ -1,0 +1,70 @@
+<view class="container">
+  <view wx:if="{{task}}" class="task-detail">
+    <view class="task-header">
+      <view class="difficulty-badge" data-difficulty="{{task.difficulty}}">
+        {{getDifficultyLabel(task.difficulty)}}
+      </view>
+      <view wx:if="{{currentProgress >= 100}}" class="completed-badge">✓ 已完成</view>
+    </view>
+    
+    <text class="task-title">{{task.taskName}}</text>
+    <text class="task-description">{{task.description}}</text>
+
+    <view class="section">
+      <text class="section-title">任务要求</text>
+      <view class="requirements-list">
+        <view wx:for="{{getRequirements()}}" wx:key="index" class="requirement-item">
+          <text class="requirement-icon">✓</text>
+          <text class="requirement-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">💡 提示</text>
+      <view wx:if="{{task.hints && task.hints.length > 0}}" class="hints-list">
+        <view wx:for="{{task.hints}}" wx:key="index" class="hint-item">
+          <text class="hint-number">{{index + 1}}</text>
+          <text class="hint-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">完成进度</text>
+      <view class="progress-section">
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{currentProgress}}%"></view>
+        </view>
+        <text class="progress-text">{{currentProgress}}%</text>
+      </view>
+    </view>
+
+    <view wx:if="{{lastScore}}" class="section">
+      <text class="section-title">上次评分</text>
+      <view class="score-card">
+        <view class="score-circle">
+          <text class="score-value">{{Math.round(lastScore)}}</text>
+          <text class="score-label">分</text>
+        </view>
+        <view class="score-feedback">
+          <text class="feedback-text">{{getScoreFeedback(lastScore)}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="action-buttons">
+      <view class="btn-secondary" bindtap="goToSandbox">
+        <text>开始创作</text>
+      </view>
+      <view class="btn-primary" bindtap="submitTask">
+        <text>提交任务</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="loading-state">
+    <text class="loading-icon">⏳</text>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

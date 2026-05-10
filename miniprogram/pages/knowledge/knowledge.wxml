@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">理论快查</text>
+    <text class="page-subtitle">学习色彩与构图知识</text>
+  </view>
+
+  <view class="category-tabs">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="categoryId"
+      class="category-tab"
+      bindtap="selectCategory"
+      data-category-id="{{item.categoryId}}"
+    >
+      <text class="tab-icon">{{getCategoryIcon(item.icon)}}</text>
+      <text class="tab-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="cards-list">
+    <view 
+      wx:for="{{currentCards}}" 
+      wx:key="cardId" 
+      class="knowledge-card"
+      bindtap="showCardDetail"
+      data-card="{{item}}"
+    >
+      <view class="card-header">
+        <text class="card-title">{{item.title}}</text>
+      </view>
+      <view class="card-content">
+        <text class="card-preview">{{item.content.slice(0, 100)}}...</text>
+      </view>
+      <view class="card-footer">
+        <text class="card-action">查看详情 →</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{currentCards.length === 0}}" class="empty-state">
+    <text class="empty-icon">📚</text>
+    <text class="empty-text">暂无知识卡片</text>
+  </view>
+
+  <view wx:if="{{showDetail}}" class="detail-modal" bindtap="hideDetail">
+    <view class="detail-content" catchtap="stopPropagation">
+      <view class="detail-header">
+        <text class="detail-title">{{selectedCard.title}}</text>
+        <view class="detail-close" bindtap="hideDetail">✕</view>
+      </view>
+      <scroll-view class="detail-body" scroll-y>
+        <text class="detail-text">{{selectedCard.content}}</text>
+        <view wx:if="{{selectedCard.example}}" class="detail-example">
+          <text class="example-label">示例：</text>
+          <text class="example-text">{{selectedCard.example}}</text>
+        </view>
+      </scroll-view>
+      <view class="detail-action" bindtap="goToSandbox">
+        <text>去沙盒实践 →</text>
+      </view>
+    </view>
+  </view>
+</view>

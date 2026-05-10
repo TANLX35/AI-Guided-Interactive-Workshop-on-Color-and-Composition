@@ -1,0 +1,143 @@
+<view class="sandbox-container">
+  <view class="canvas-area">
+    <canvas 
+      class="main-canvas" 
+      canvas-id="mainCanvas"
+      bindtouchstart="onTouchStart"
+      bindtouchmove="onTouchMove"
+      bindtouchend="onTouchEnd"
+      style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+    ></canvas>
+    
+    <view wx:if="{{showGuideLines}}" class="guide-lines" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;">
+      <view class="guide-line vertical" style="left: {{canvasWidth / 3}}px;"></view>
+      <view class="guide-line vertical" style="left: {{canvasWidth * 2 / 3}}px;"></view>
+      <view class="guide-line horizontal" style="top: {{canvasHeight / 3}}px;"></view>
+      <view class="guide-line horizontal" style="top: {{canvasHeight * 2 / 3}}px;"></view>
+      <view class="guide-dot" style="left: {{canvasWidth / 3}}px; top: {{canvasHeight / 3}}px;"></view>
+      <view class="guide-dot" style="left: {{canvasWidth * 2 / 3}}px; top: {{canvasHeight / 3}}px;"></view>
+      <view class="guide-dot" style="left: {{canvasWidth / 3}}px; top: {{canvasHeight * 2 / 3}}px;"></view>
+      <view class="guide-dot" style="left: {{canvasWidth * 2 / 3}}px; top: {{canvasHeight * 2 / 3}}px;"></view>
+    </view>
+  </view>
+
+  <view class="toolbar">
+    <view class="tool-group">
+      <view 
+        class="tool-item" 
+        bindtap="showColorPicker"
+        style="background: {{selectedColor}};"
+      >
+        <text class="tool-icon">🎨</text>
+      </view>
+      <view class="tool-item" bindtap="addElement">
+        <text class="tool-icon">➕</text>
+      </view>
+      <view class="tool-item" bindtap="toggleGuideLines">
+        <text class="tool-icon">{{showGuideLines ? '📐' : '📏'}}</text>
+      </view>
+      <view class="tool-item" bindtap="clearCanvas">
+        <text class="tool-icon">🗑️</text>
+      </view>
+    </view>
+    
+    <view class="action-group">
+      <view class="action-btn" bindtap="analyzeWork">
+        <text class="action-icon">🔍</text>
+        <text class="action-text">分析</text>
+      </view>
+      <view class="action-btn" bindtap="showChat">
+        <text class="action-icon">💬</text>
+        <text class="action-text">问答</text>
+      </view>
+      <view class="action-btn primary" bindtap="saveWork">
+        <text class="action-icon">💾</text>
+        <text class="action-text">保存</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{showColorPanel}}" class="color-panel">
+    <view class="panel-header">
+      <text class="panel-title">选择颜色</text>
+      <view class="panel-close" bindtap="hideColorPicker">✕</view>
+    </view>
+    <view class="color-grid">
+      <view 
+        wx:for="{{colorPalette}}" 
+        wx:key="color"
+        class="color-item"
+        style="background: {{item.color}};"
+        bindtap="selectColor"
+        data-color="{{item.color}}"
+      ></view>
+    </view>
+    <view class="opacity-slider">
+      <text class="slider-label">透明度: {{Math.round(selectedOpacity * 100)}}%</text>
+      <slider 
+        value="{{selectedOpacity * 100}}" 
+        min="10" 
+        max="100" 
+        bindchange="onOpacityChange"
+      />
+    </view>
+  </view>
+
+  <view wx:if="{{showAnalysis}}" class="analysis-panel">
+    <view class="panel-header">
+      <text class="panel-title">作品分析</text>
+      <view class="panel-close" bindtap="hideAnalysis">✕</view>
+    </view>
+    <view class="analysis-content">
+      <view class="analysis-stats">
+        <view class="stat-item">
+          <text class="stat-value">{{analysisData.elementCount}}</text>
+          <text class="stat-label">元素数量</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{analysisData.colorCount}}</text>
+          <text class="stat-label">颜色种类</text>
+        </view>
+      </view>
+      <view class="analysis-text">
+        <text>{{analysisData.analysis}}</text>
+      </view>
+      <view class="analysis-suggestions">
+        <text class="suggestions-title">改进建议：</text>
+        <view wx:for="{{analysisData.suggestions}}" wx:key="index" class="suggestion-item">
+          <text>• {{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{showChatPanel}}" class="chat-panel">
+    <view class="panel-header">
+      <text class="panel-title">AI助手</text>
+      <view class="panel-close" bindtap="hideChat">✕</view>
+    </view>
+    <scroll-view class="chat-messages" scroll-y>
+      <view wx:for="{{chatMessages}}" wx:key="id" class="message-item">
+        <view class="message-avatar">{{item.role === 'user' ? '👤' : '🤖'}}</view>
+        <view class="message-content">
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="chat-input">
+      <input 
+        class="input-field" 
+        placeholder="输入你的问题..." 
+        value="{{chatInput}}"
+        bindinput="onChatInput"
+        bindconfirm="sendMessage"
+      />
+      <view class="send-btn" bindtap="sendMessage">发送</view>
+    </view>
+  </view>
+
+  <view wx:if="{{aiMessage}}" class="ai-message-toast">
+    <view class="ai-avatar">🤖</view>
+    <view class="ai-text">{{aiMessage}}</view>
+  </view>
+</view>

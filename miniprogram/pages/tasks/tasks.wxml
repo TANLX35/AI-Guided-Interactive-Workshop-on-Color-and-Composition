@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="page-header">
+    <text class="page-title">挑战任务</text>
+    <text class="page-subtitle">完成任务，提升技能</text>
+  </view>
+
+  <view class="filter-bar">
+    <view 
+      wx:for="{{filterOptions}}" 
+      wx:key="value"
+      class="filter-item"
+      bindtap="setFilter"
+      data-filter="{{item.value}}"
+    >
+      <text class="filter-text">{{item.label}}</text>
+      <view wx:if="{{currentFilter === item.value}}" class="filter-active"></view>
+    </view>
+  </view>
+
+  <view class="tasks-list">
+    <view 
+      wx:for="{{tasks}}" 
+      wx:key="taskId" 
+      class="task-card"
+      bindtap="goToTaskDetail"
+      data-task-id="{{item.taskId}}"
+    >
+      <view class="task-header">
+        <view class="difficulty-badge" data-difficulty="{{item.difficulty}}">
+          {{getDifficultyLabel(item.difficulty)}}
+        </view>
+        <view wx:if="{{getTaskProgress(item.taskId) > 0}}" class="progress-indicator">
+          {{getTaskProgress(item.taskId)}}%
+        </view>
+      </view>
+      <view class="task-content">
+        <text class="task-name">{{item.taskName}}</text>
+        <text class="task-desc">{{item.description}}</text>
+      </view>
+      <view class="task-footer">
+        <view class="task-hints">
+          <text class="hints-icon">💡</text>
+          <text class="hints-count">{{item.hints && item.hints.length ? item.hints.length : 0}} 个提示</text>
+        </view>
+        <view class="task-action">
+          <text class="action-text">{{getTaskProgress(item.taskId) >= 100 ? '已完成' : '开始任务'}}</text>
+          <text class="action-arrow">→</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{tasks.length === 0}}" class="empty-state">
+    <text class="empty-icon">📋</text>
+    <text class="empty-text">暂无任务</text>
+    <text class="empty-hint">请稍后再试</text>
+  </view>
+</view>

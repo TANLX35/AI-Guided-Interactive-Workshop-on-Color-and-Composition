@@ -1,0 +1,94 @@
+<view class="container">
+  <view class="welcome-section">
+    <view class="logo-wrapper">
+      <view class="logo">
+        <text class="logo-text">🎨</text>
+      </view>
+    </view>
+    <view class="welcome-title">AI全陪式色彩与构图</view>
+    <view class="welcome-subtitle">交互学习工坊</view>
+    <view class="welcome-desc">通过互动实验，掌握色彩理论与构图法则</view>
+  </view>
+
+  <view class="quick-actions">
+    <view class="action-card fade-in" bindtap="goToSandbox">
+      <view class="action-icon">🎯</view>
+      <view class="action-title">开始创作</view>
+      <view class="action-desc">进入沙盒画布</view>
+    </view>
+    <view class="action-card fade-in" bindtap="goToTasks">
+      <view class="action-icon">📋</view>
+      <view class="action-title">挑战任务</view>
+      <view class="action-desc">完成学习任务</view>
+    </view>
+    <view class="action-card fade-in" bindtap="goToKnowledge">
+      <view class="action-icon">📚</view>
+      <view class="action-title">理论快查</view>
+      <view class="action-desc">学习专业知识</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">最近作品</text>
+      <text class="section-more" bindtap="goToProfile">查看全部</text>
+    </view>
+    
+    <view wx:if="{{recentWorks.length > 0}}" class="works-list">
+      <view 
+        wx:for="{{recentWorks}}" 
+        wx:key="workId" 
+        class="work-item"
+        bindtap="openWork"
+        data-work-id="{{item.workId}}"
+      >
+        <view class="work-thumb">
+          <canvas 
+            class="work-canvas" 
+            canvas-id="workCanvas{{index}}"
+            style="width: 200rpx; height: 200rpx;"
+          ></canvas>
+        </view>
+        <view class="work-info">
+          <text class="work-name">{{item.workName || '未命名作品'}}</text>
+          <text class="work-date">{{formatDate(item.createdAt)}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:else class="empty-state">
+      <text class="empty-icon">🖼️</text>
+      <text class="empty-text">暂无作品</text>
+      <text class="empty-hint">快去创作你的第一幅作品吧！</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">学习指南</text>
+    </view>
+    <view class="guide-list">
+      <view class="guide-item">
+        <view class="guide-step">1</view>
+        <view class="guide-content">
+          <text class="guide-title">探索沙盒画布</text>
+          <text class="guide-desc">拖拽色块，尝试不同的色彩搭配</text>
+        </view>
+      </view>
+      <view class="guide-item">
+        <view class="guide-step">2</view>
+        <view class="guide-content">
+          <text class="guide-title">开启AI讲解</text>
+          <text class="guide-desc">操作时AI会自动讲解相关知识</text>
+        </view>
+      </view>
+      <view class="guide-item">
+        <view class="guide-step">3</view>
+        <view class="guide-content">
+          <text class="guide-title">完成挑战任务</text>
+          <text class="guide-desc">通过任务巩固所学知识</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
