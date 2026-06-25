@@ -1,0 +1,45 @@
+<view class="tasks-container">
+  <view class="filter-section">
+    <view class="filter-tabs flex-row">
+      <block wx:for="{{categories}}" wx:key="*this">
+        <view 
+          class="filter-tab {{currentCategory === item ? 'active' : ''}}"
+          bindtap="filterTasks"
+          data-category="{{item}}">
+          <text>{{item === 'all' ? '全部' : item}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="tasks-list">
+    <block wx:for="{{tasks}}" wx:key="taskId">
+      <view 
+        class="task-item card"
+        bindtap="openTask"
+        data-task-id="{{item.taskId}}"
+        wx:if="{{currentCategory === 'all' || item.difficulty === currentCategory}}">
+        <view class="task-header flex-between">
+          <text class="task-name font-medium font-bold text-primary">{{item.taskName}}</text>
+          <view class="task-difficulty {{item.difficulty}}">
+            <text class="font-small">{{item.difficulty}}</text>
+          </view>
+        </view>
+        
+        <text class="task-desc font-small text-secondary">{{item.description}}</text>
+        
+        <view class="task-progress">
+          <view class="progress-bar">
+            <view class="progress-fill bg-primary" style="width: {{item.progress || 0}}%"></view>
+          </view>
+          <text class="progress-text font-small text-secondary">{{item.progress || 0}}%</text>
+        </view>
+        
+        <view class="task-hints" wx:if="{{item.hints && item.hints.length > 0}}">
+          <text class="hints-label font-small text-secondary">提示:</text>
+          <text class="hints-content font-small text-secondary">{{item.hints[0]}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

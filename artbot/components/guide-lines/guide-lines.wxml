@@ -1,0 +1,34 @@
+<view class="guide-lines-container">
+  <view class="guide-lines-selector flex-row">
+    <block wx:for="{{guideLineTypes}}" wx:key="*this">
+      <view 
+        class="guide-option {{type === item ? 'active' : ''}}"
+        bindtap="selectGuideLine"
+        data-type="{{item}}">
+        <text class="option-label font-small">{{item === 'none' ? '无' : item}}</text>
+      </view>
+    </block>
+  </view>
+  
+  <view class="guide-lines-display" style="width: {{width}}px; height: {{height}}px;">
+    <view class="guide-thirds" wx:if="{{type === 'thirds'}}">
+      <view class="guide-line vertical line-1"></view>
+      <view class="guide-line vertical line-2"></view>
+      <view class="guide-line horizontal line-1"></view>
+      <view class="guide-line horizontal line-2"></view>
+    </view>
+    
+    <view class="guide-golden" wx:if="{{type === 'golden'}}">
+      <view class="guide-spiral"></view>
+    </view>
+    
+    <view class="guide-diagonal" wx:if="{{type === 'diagonal'}}">
+      <view class="guide-line diagonal-1"></view>
+      <view class="guide-line diagonal-2"></view>
+    </view>
+    
+    <view class="guide-symmetry" wx:if="{{type === 'symmetry'}}">
+      <view class="guide-line center"></view>
+    </view>
+  </view>
+</view>

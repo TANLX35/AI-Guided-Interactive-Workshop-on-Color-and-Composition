@@ -1,0 +1,90 @@
+/* ── 工具栏 · 文艺清新配色 ── */
+
+.tool-bar-container {
+  background-color: #FFFFFF;
+  padding: 16rpx 12rpx;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 16rpx rgba(139, 123, 107, 0.06);
+}
+
+.tool-bar {
+  justify-content: space-around;
+}
+
+/* ── 工具项 ── */
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12rpx 16rpx;
+  border-radius: 16rpx;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.tool-item:active {
+  transform: scale(0.95);
+}
+
+.tool-item.active {
+  background-color: #F5F2ED;
+}
+
+.tool-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24rpx;
+  height: 4rpx;
+  border-radius: 2rpx;
+  background: linear-gradient(90deg, #D4A574 0%, #8B7B6B 100%);
+}
+
+/* ── 图标容器 ── */
+.tool-icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+  background: linear-gradient(135deg, #F5F2ED 0%, #EDE8E2 100%);
+  margin-bottom: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 2rpx 8rpx rgba(139, 123, 107, 0.04);
+}
+
+.tool-item.active .tool-icon {
+  background: linear-gradient(135deg, #D4A574 0%, #C4956B 100%);
+  box-shadow: 0 4rpx 16rpx rgba(212, 165, 116, 0.3);
+}
+
+/* ── 图标文字/emoji ── */
+.icon-text {
+  font-size: 28rpx;
+  transition: all 0.25s ease;
+}
+
+.tool-item .icon-text {
+  color: #B5A898;
+}
+
+.tool-item.active .icon-text {
+  color: #FFFFFF;
+}
+
+/* ── 标签 ── */
+.tool-label {
+  text-align: center;
+  font-size: 22rpx;
+  color: #B5A898;
+  transition: color 0.25s ease;
+  margin-top: 4rpx;
+}
+
+.tool-item.active .tool-label {
+  color: #8B7B6B;
+  font-weight: 600;
+}

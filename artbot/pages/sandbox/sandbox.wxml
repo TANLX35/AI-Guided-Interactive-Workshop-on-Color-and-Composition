@@ -1,0 +1,241 @@
+<view class="sandbox-container">
+  <view class="canvas-section">
+    <view class="canvas-wrapper" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px; background-color: {{canvasBackgroundColor}};">
+      <canvas
+        canvas-id="mainCanvas"
+        class="main-canvas"
+        style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+        bindtouchstart="onCanvasTouchStart"
+        bindtouchmove="onCanvasTouchMove"
+        bindtouchend="onCanvasTouchEnd">
+      </canvas>
+
+      <view class="guide-lines" wx:if="{{guideLineType !== 'none'}}">
+        <view class="guide-thirds" wx:if="{{guideLineType === 'thirds'}}">
+          <view class="guide-line guide-line-vertical guide-line-1"></view>
+          <view class="guide-line guide-line-vertical guide-line-2"></view>
+          <view class="guide-line guide-line-horizontal guide-line-1"></view>
+          <view class="guide-line guide-line-horizontal guide-line-2"></view>
+        </view>
+        <view class="guide-golden" wx:if="{{guideLineType === 'golden'}}">
+          <view class="golden-rect golden-rect-1" style="width: {{canvasWidth * 0.618}}px; height: {{canvasHeight * 0.618}}px; left: 0; top: 0;"></view>
+          <view class="golden-rect golden-rect-2" style="width: {{canvasWidth * 0.382}}px; height: {{canvasHeight * 0.618}}px; right: 0; top: 0;"></view>
+          <view class="golden-rect golden-rect-3" style="width: {{canvasWidth * 0.382}}px; height: {{canvasHeight * 0.382}}px; right: 0; bottom: 0;"></view>
+          <view class="golden-spiral-dot" style="left: {{canvasWidth * 0.618}}px; top: {{canvasHeight * 0.382}}px;"></view>
+        </view>
+        <view class="guide-diagonal" wx:if="{{guideLineType === 'diagonal'}}">
+          <view class="guide-line guide-line-diagonal-1"></view>
+          <view class="guide-line guide-line-diagonal-2"></view>
+        </view>
+        <view class="guide-symmetry" wx:if="{{guideLineType === 'symmetry'}}">
+          <view class="guide-line guide-line-center"></view>
+        </view>
+      </view>
+
+      <block wx:for="{{elements}}" wx:key="id">
+        <!-- 三角形 -->
+        <view wx:if="{{item.type === 'triangle'}}"
+          class="canvas-element triangle-element {{selectedElement.id === item.id ? 'selected' : ''}} {{item.filters.indexOf('blur') >= 0 ? 'filter-blur' : ''}} {{item.filters.indexOf('grayscale') >= 0 ? 'filter-grayscale' : ''}} {{item.filters.indexOf('invert') >= 0 ? 'filter-invert' : ''}} {{item.filters.indexOf('sepia') >= 0 ? 'filter-sepia' : ''}}"
+          style="left: {{item.x}}px; top: {{item.y}}px; width: {{item.width}}px; height: {{item.height}}px; border-left: {{item.width/2}}px solid transparent; border-right: {{item.width/2}}px solid transparent; border-bottom: {{item.height}}px solid {{item.color}}; opacity: {{item.opacity}}; transform: rotate({{item.rotation}}deg);"
+          data-id="{{item.id}}"
+          bindtouchstart="onElementTouchStart"
+          bindtouchmove="onElementTouchMove"
+          bindtouchend="onElementTouchEnd"
+          bindtap="selectElement"
+          bindlongpress="deleteElement">
+        </view>
+        <!-- 矩形/圆形 -->
+        <view wx:else
+          class="canvas-element {{selectedElement.id === item.id ? 'selected' : ''}} {{item.type}} {{item.filters.indexOf('blur') >= 0 ? 'filter-blur' : ''}} {{item.filters.indexOf('grayscale') >= 0 ? 'filter-grayscale' : ''}} {{item.filters.indexOf('invert') >= 0 ? 'filter-invert' : ''}} {{item.filters.indexOf('sepia') >= 0 ? 'filter-sepia' : ''}}"
+          style="left: {{item.x}}px; top: {{item.y}}px; width: {{item.width}}px; height: {{item.height}}px; background-color: {{item.color}}; opacity: {{item.opacity}}; transform: rotate({{item.rotation}}deg); {{item.type === 'circle' ? 'border-radius: 50%;' : ''}}"
+          data-id="{{item.id}}"
+          bindtouchstart="onElementTouchStart"
+          bindtouchmove="onElementTouchMove"
+          bindtouchend="onElementTouchEnd"
+          bindtap="selectElement"
+          bindlongpress="deleteElement">
+        </view>
+
+        <view wx:if="{{selectedElement.id === item.id}}" class="element-handles-container" style="left: {{item.x}}px; top: {{item.y}}px;">
+          <view class="element-handles" style="width: {{item.width}}px; height: {{item.height}}px; transform: rotate({{item.rotation}}deg);">
+            <view
+              class="handle handle-center"
+              data-handle="center"
+              data-element-id="{{item.id}}"
+              bindtouchstart="onHandleTouchStart"
+              bindtouchmove="onHandleTouchMove"
+              bindtouchend="onHandleTouchEnd">
+            </view>
+            <view
+              class="handle handle-n"
+              data-handle="n"
+              data-element-id="{{item.id}}"
+              bindtouchstart="onHandleTouchStart"
+              bindtouchmove="onHandleTouchMove"
+              bindtouchend="onHandleTouchEnd">
+            </view>
+            <view
+              class="handle handle-s"
+              data-handle="s"
+              data-element-id="{{item.id}}"
+              bindtouchstart="onHandleTouchStart"
+              bindtouchmove="onHandleTouchMove"
+              bindtouchend="onHandleTouchEnd">
+            </view>
+            <view
+              class="handle handle-e"
+              data-handle="e"
+              data-element-id="{{item.id}}"
+              bindtouchstart="onHandleTouchStart"
+              bindtouchmove="onHandleTouchMove"
+              bindtouchend="onHandleTouchEnd">
+            </view>
+            <view
+              class="handle handle-w"
+              data-handle="w"
+              data-element-id="{{item.id}}"
+              bindtouchstart="onHandleTouchStart"
+              bindtouchmove="onHandleTouchMove"
+              bindtouchend="onHandleTouchEnd">
+            </view>
+          </view>
+          <view
+            class="handle handle-rotate"
+            data-handle="rotate"
+            data-element-id="{{item.id}}"
+            bindtouchstart="onHandleTouchStart"
+            bindtouchmove="onHandleTouchMove"
+            bindtouchend="onHandleTouchEnd">
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="toolbar-section">
+    <view class="toolbar flex-row">
+      <view class="tool-item" bindtap="toggleColorPicker">
+        <text class="tool-icon">🎨</text>
+        <text class="tool-label">颜色</text>
+      </view>
+      <view class="tool-item" bindtap="toggleBackgroundColorPicker">
+        <text class="tool-icon">🖼️</text>
+        <text class="tool-label">背景</text>
+      </view>
+      <view class="tool-item" bindtap="addElement" data-type="rectangle">
+        <text class="tool-icon">▢</text>
+        <text class="tool-label">矩形</text>
+      </view>
+      <view class="tool-item" bindtap="addElement" data-type="circle">
+        <text class="tool-icon">●</text>
+        <text class="tool-label">圆形</text>
+      </view>
+      <view class="tool-item" bindtap="addElement" data-type="triangle">
+        <text class="tool-icon">△</text>
+        <text class="tool-label">三角</text>
+      </view>
+      <view class="tool-item" bindtap="analyzeWork">
+        <text class="tool-icon">📊</text>
+        <text class="tool-label">分析</text>
+      </view>
+      <view class="tool-item" bindtap="toggleChat">
+        <text class="tool-icon">💬</text>
+        <text class="tool-label">问答</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="guide-line-selector flex-row">
+    <block wx:for="{{guideLines}}" wx:key="*this">
+      <view
+        class="guide-option {{guideLineType === item ? 'active' : ''}}"
+        bindtap="setGuideLine"
+        data-type="{{item}}">
+        <text>{{item === 'none' ? '无' : item}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="filter-selector flex-row" wx:if="{{selectedElement}}">
+    <block wx:for="{{filters}}" wx:key="*this">
+      <view
+        class="filter-option {{selectedElement.filters.indexOf(item) >= 0 ? 'active' : ''}}"
+        bindtap="applyFilter"
+        data-filter="{{item}}">
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="color-picker-popup" wx:if="{{showColorPicker}}">
+    <view class="color-picker-content">
+      <view class="color-picker-header">
+        <text class="color-picker-title">选择颜色</text>
+      </view>
+      <view class="color-grid flex-row">
+        <block wx:for="{{colors}}" wx:key="*this">
+          <view
+            class="color-item {{currentColor === item ? 'selected' : ''}}"
+            style="background-color: {{item}}"
+            bindtap="selectColor"
+            data-color="{{item}}">
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="color-picker-popup" wx:if="{{showBackgroundColorPicker}}">
+    <view class="color-picker-content">
+      <view class="color-picker-header">
+        <text class="color-picker-title">选择背景色</text>
+      </view>
+      <view class="color-grid flex-row">
+        <block wx:for="{{backgroundColors}}" wx:key="*this">
+          <view
+            class="color-item {{canvasBackgroundColor === item ? 'selected' : ''}}"
+            style="background-color: {{item}}"
+            bindtap="selectBackgroundColor"
+            data-color="{{item}}">
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="chat-assistant" wx:if="{{showChat}}">
+    <view class="chat-header flex-between">
+      <text class="chat-title font-medium font-bold">AI问答助手</text>
+      <view class="chat-close" bindtap="toggleChat">✕</view>
+    </view>
+    <view class="chat-messages">
+      <block wx:for="{{chatMessages}}" wx:key="timestamp">
+        <view class="chat-message {{item.role}}">
+          <text class="message-content">{{item.content}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="chat-input flex-row">
+      <input
+        class="chat-text-input"
+        placeholder="输入问题..."
+        bindinput="onChatInput"
+        bindconfirm="sendMessage"
+        confirm-type="send"
+        value="{{chatInputValue}}"
+      />
+      <button class="chat-send-btn" bindtap="sendChatMessage">发送</button>
+    </view>
+  </view>
+
+  <view class="action-buttons flex-row">
+    <button class="action-btn btn-primary" bindtap="saveWork">保存</button>
+    <button class="action-btn btn-secondary" bindtap="clearCanvas">清空</button>
+  </view>
+
+  <view class="loading-overlay" wx:if="{{aiLoading}}">
+    <view class="loading-content">
+      <text class="loading-text">AI正在思考...</text>
+    </view>
+  </view>
+</view>

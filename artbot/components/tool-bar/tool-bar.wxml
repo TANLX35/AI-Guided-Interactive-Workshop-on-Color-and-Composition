@@ -1,0 +1,15 @@
+<view class="tool-bar-container">
+  <view class="tool-bar flex-row">
+    <block wx:for="{{tools}}" wx:key="id">
+      <view 
+        class="tool-item {{activeTool === item.id ? 'active' : ''}}"
+        bindtap="selectTool"
+        data-tool-id="{{item.id}}">
+        <view class="tool-icon flex-center">
+          <text class="icon-text font-medium">{{item.icon}}</text>
+        </view>
+        <text class="tool-label font-small text-secondary">{{item.label}}</text>
+      </view>
+    </block>
+  </view>
+</view>

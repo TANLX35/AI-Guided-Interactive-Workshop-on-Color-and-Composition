@@ -1,0 +1,255 @@
+/* ── 聊天助手 · 文艺清新配色 ── */
+
+.chat-assistant-container {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80%;
+  height: 70%;
+  background-color: #FFFFFF;
+  border-radius: 20rpx 0 0 20rpx;
+  box-shadow: -4rpx 0 24rpx rgba(139, 123, 107, 0.12);
+  z-index: 999;
+}
+
+.chat-assistant-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24rpx;
+}
+
+/* ── 头部 ── */
+.chat-header {
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #EDE8E2;
+}
+
+.header-left {
+  align-items: center;
+}
+
+.chat-icon {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 22rpx;
+  background: linear-gradient(135deg, #D4A574 0%, #C4956B 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  margin-right: 12rpx;
+}
+
+.chat-close {
+  font-size: 32rpx;
+  color: #B5A898;
+  padding: 8rpx;
+  transition: color 0.2s;
+}
+
+.chat-close:active {
+  color: #8B7B6B;
+}
+
+/* ── 消息区域 ── */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24rpx 0;
+}
+
+.message-item {
+  display: flex;
+  margin-bottom: 24rpx;
+  align-items: flex-start;
+}
+
+.message-item.user {
+  justify-content: flex-end;
+}
+
+.message-item.assistant {
+  justify-content: flex-start;
+}
+
+/* ── 头像 ── */
+.message-avatar {
+  width: 44rpx;
+  height: 44rpx;
+  min-width: 44rpx;
+  border-radius: 22rpx;
+  background: linear-gradient(135deg, #F0EDE8 0%, #E8E2DA 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12rpx;
+  font-size: 22rpx;
+  color: #8B7B6B;
+}
+
+.message-item.user .message-avatar {
+  margin-right: 0;
+  margin-left: 12rpx;
+  order: 2;
+  background: linear-gradient(135deg, #D4A574 0%, #C4956B 100%);
+  color: #FFFFFF;
+}
+
+/* ── 消息气泡 ── */
+.message-content {
+  max-width: 70%;
+  padding: 16rpx 20rpx;
+  border-radius: 16rpx;
+  background-color: #F5F2ED;
+  box-shadow: 0 1rpx 4rpx rgba(139, 123, 107, 0.04);
+}
+
+.message-item.user .message-content {
+  background: linear-gradient(135deg, #8B7B6B 0%, #A49383 100%);
+  color: #FFFFFF;
+  order: 1;
+}
+
+.message-text {
+  line-height: 1.6;
+  font-size: 26rpx;
+}
+
+.message-time {
+  margin-top: 8rpx;
+  font-size: 20rpx;
+  color: #C5BFB6;
+}
+
+.message-item.user .message-time {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── 加载状态 ── */
+.loading-message {
+  display: flex;
+  margin-bottom: 24rpx;
+  align-items: flex-start;
+}
+
+.loading-avatar {
+  width: 44rpx;
+  height: 44rpx;
+  min-width: 44rpx;
+  border-radius: 22rpx;
+  background: linear-gradient(135deg, #F0EDE8 0%, #E8E2DA 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12rpx;
+  font-size: 22rpx;
+  color: #8B7B6B;
+}
+
+.loading-content {
+  padding: 16rpx 20rpx;
+  border-radius: 16rpx;
+  background-color: #F5F2ED;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1rpx 4rpx rgba(139, 123, 107, 0.04);
+}
+
+.loading-text {
+  color: #B5A898;
+  font-size: 26rpx;
+}
+
+.loading-dots {
+  margin-left: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 5rpx;
+  background-color: #D4A574;
+  margin-right: 6rpx;
+  animation: dot-animation 1.2s infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-animation {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* ── 输入区域 ── */
+.chat-input-section {
+  padding-top: 20rpx;
+  border-top: 1rpx solid #EDE8E2;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 16rpx 20rpx;
+  background-color: #F8F5F0;
+  border-radius: 24rpx;
+  border: 1rpx solid #EDE8E2;
+  font-size: 26rpx;
+  color: #3D3D3D;
+}
+
+.chat-input::placeholder {
+  color: #C5BFB6;
+}
+
+.send-btn {
+  padding: 16rpx 32rpx;
+  margin-left: 12rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(135deg, #D4A574 0%, #C4956B 100%);
+  color: #FFFFFF;
+  font-size: 26rpx;
+  border: none;
+}
+
+.send-btn::after {
+  border: none;
+}
+
+.send-btn:active {
+  opacity: 0.85;
+}
+
+/* ── 底部操作 ── */
+.chat-actions {
+  padding-top: 16rpx;
+}
+
+.clear-btn {
+  padding: 10rpx 24rpx;
+  background-color: #F5F2ED;
+  color: #B5A898;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.clear-btn:active {
+  background-color: #EDE8E2;
+  color: #8B7B6B;
+}

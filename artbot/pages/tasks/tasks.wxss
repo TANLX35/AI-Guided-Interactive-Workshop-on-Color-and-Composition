@@ -1,0 +1,135 @@
+/* ── 任务列表 · 文艺清新配色 ── */
+
+.tasks-container {
+  padding: 24rpx;
+  background-color: #F8F5F0;
+  min-height: 100vh;
+}
+
+/* ── 筛选标签 ── */
+.filter-section {
+  margin-bottom: 24rpx;
+}
+
+.filter-tabs {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 8rpx;
+  justify-content: space-around;
+  box-shadow: 0 2rpx 12rpx rgba(139, 123, 107, 0.05);
+}
+
+.filter-tab {
+  flex: 1;
+  padding: 14rpx 0;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #B5A898;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.25s;
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, #8B7B6B 0%, #A49383 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 12rpx rgba(139, 123, 107, 0.2);
+}
+
+/* ── 任务列表 ── */
+.tasks-list {
+  margin-top: 8rpx;
+}
+
+.task-item {
+  margin-bottom: 20rpx;
+}
+
+/* ── 任务卡片 ── */
+.task-header {
+  margin-bottom: 16rpx;
+}
+
+.task-name {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #3D3D3D;
+}
+
+/* 难度标签 */
+.task-difficulty {
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.task-difficulty.easy {
+  background-color: #EEF2EE;
+  color: #7A8F7A;
+}
+
+.task-difficulty.medium {
+  background-color: #FDF3E8;
+  color: #D4A574;
+}
+
+.task-difficulty.hard {
+  background-color: #FCE8E4;
+  color: #D4735E;
+}
+
+/* 描述 */
+.task-desc {
+  margin-bottom: 16rpx;
+  line-height: 1.5;
+  font-size: 26rpx;
+  color: #9B9B9B;
+}
+
+/* 进度条 */
+.task-progress {
+  margin-bottom: 16rpx;
+}
+
+.progress-bar {
+  height: 10rpx;
+  background-color: #EDE8E2;
+  border-radius: 5rpx;
+  overflow: hidden;
+  margin-bottom: 6rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 5rpx;
+  background: linear-gradient(90deg, #A4B5A3 0%, #8B7B6B 100%);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  text-align: right;
+  font-size: 22rpx;
+  color: #B5A898;
+}
+
+/* 提示 */
+.task-hints {
+  padding-top: 14rpx;
+  border-top: 1rpx solid #EDE8E2;
+  display: flex;
+  align-items: flex-start;
+}
+
+.hints-label {
+  margin-right: 10rpx;
+  font-size: 24rpx;
+  color: #D4A574;
+}
+
+.hints-content {
+  line-height: 1.5;
+  font-size: 24rpx;
+  color: #9B9B9B;
+}

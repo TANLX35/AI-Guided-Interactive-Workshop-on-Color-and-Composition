@@ -1,0 +1,162 @@
+<view class="admin-container">
+  <view class="admin-header flex-between">
+    <text class="admin-title font-large font-bold text-primary">管理员后台</text>
+    <button class="logout-btn font-small" bindtap="logout">退出</button>
+  </view>
+
+  <view class="section-tabs flex-row">
+    <view 
+      class="section-tab {{currentSection === 'tasks' ? 'active' : ''}}"
+      bindtap="switchSection"
+      data-section="tasks">
+      <text>任务管理</text>
+    </view>
+    <view 
+      class="section-tab {{currentSection === 'knowledge' ? 'active' : ''}}"
+      bindtap="switchSection"
+      data-section="knowledge">
+      <text>知识管理</text>
+    </view>
+    <view 
+      class="section-tab {{currentSection === 'ai' ? 'active' : ''}}"
+      bindtap="switchSection"
+      data-section="ai">
+      <text>AI配置</text>
+    </view>
+    <view 
+      class="section-tab {{currentSection === 'stats' ? 'active' : ''}}"
+      bindtap="switchSection"
+      data-section="stats">
+      <text>数据统计</text>
+    </view>
+  </view>
+
+  <view class="section-content" wx:if="{{currentSection === 'tasks'}}">
+    <button class="add-btn btn-primary font-medium" bindtap="addTask">添加任务</button>
+    
+    <view class="items-list">
+      <block wx:for="{{tasks}}" wx:key="taskId">
+        <view class="item-card card">
+          <view class="item-header flex-between">
+            <text class="item-title font-medium font-bold text-primary">{{item.taskName}}</text>
+            <view class="item-actions flex-row">
+              <button class="edit-btn font-small" bindtap="editTask" data-task-id="{{item.taskId}}">编辑</button>
+              <button class="delete-btn font-small" bindtap="deleteTask" data-task-id="{{item.taskId}}">删除</button>
+            </view>
+          </view>
+          <text class="item-desc font-small text-secondary">{{item.description}}</text>
+          <text class="item-difficulty font-small text-secondary">难度: {{item.difficulty}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section-content" wx:if="{{currentSection === 'knowledge'}}">
+    <button class="add-btn btn-primary font-medium" bindtap="addKnowledgeCard">添加知识卡片</button>
+    
+    <view class="items-list">
+      <block wx:for="{{knowledgeCards}}" wx:key="cardId">
+        <view class="item-card card">
+          <view class="item-header flex-between">
+            <text class="item-title font-medium font-bold text-primary">{{item.title}}</text>
+            <view class="item-actions flex-row">
+              <button class="edit-btn font-small" bindtap="editKnowledgeCard" data-card-id="{{item.cardId}}">编辑</button>
+              <button class="delete-btn font-small" bindtap="deleteKnowledgeCard" data-card-id="{{item.cardId}}">删除</button>
+            </view>
+          </view>
+          <text class="item-category font-small text-secondary">分类: {{item.categoryName}}</text>
+          <text class="item-desc font-small text-secondary">{{item.content}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="section-content" wx:if="{{currentSection === 'ai'}}">
+    <view class="config-card card">
+      <text class="config-title font-medium font-bold text-primary">AI服务商</text>
+      <view class="provider-selector flex-row">
+        <view 
+          class="provider-option {{aiConfig.provider === 'baidu' ? 'active' : ''}}"
+          bindtap="switchAIProvider"
+          data-provider="baidu">
+          <text>百度千帆</text>
+        </view>
+        <view 
+          class="provider-option {{aiConfig.provider === 'aliyun' ? 'active' : ''}}"
+          bindtap="switchAIProvider"
+          data-provider="aliyun">
+          <text>阿里通义</text>
+        </view>
+        <view 
+          class="provider-option {{aiConfig.provider === 'tencent' ? 'active' : ''}}"
+          bindtap="switchAIProvider"
+          data-provider="tencent">
+          <text>腾讯混元</text>
+        </view>
+        <view 
+          class="provider-option {{aiConfig.provider === 'openai' ? 'active' : ''}}"
+          bindtap="switchAIProvider"
+          data-provider="openai">
+          <text>OpenAI</text>
+        </view>
+        <view 
+          class="provider-option {{aiConfig.provider === 'custom' ? 'active' : ''}}"
+          bindtap="switchAIProvider"
+          data-provider="custom">
+          <text>自定义API</text>
+        </view>
+        <view 
+          class="provider-option {{aiConfig.provider === 'free' ? 'active' : ''}}"
+          bindtap="switchAIProvider"
+          data-provider="free">
+          <text>免费模式</text>
+        </view>
+        <view 
+          class="provider-option {{aiConfig.provider === 'mock' ? 'active' : ''}}"
+          bindtap="switchAIProvider"
+          data-provider="mock">
+          <text>模拟模式</text>
+        </view>
+      </view>
+      
+      <view class="config-field">
+        <text class="field-label font-medium text-primary">API Key</text>
+        <input 
+          class="field-input"
+          placeholder="请输入API Key"
+          value="{{aiConfig.apiKey}}"
+          bindinput="updateAIConfig"
+          data-field="apiKey"
+        />
+      </view>
+      
+      <view class="config-field">
+        <text class="field-label font-medium text-primary">Endpoint</text>
+        <input 
+          class="field-input"
+          placeholder="请输入Endpoint"
+          value="{{aiConfig.endpoint}}"
+          bindinput="updateAIConfig"
+          data-field="endpoint"
+        />
+      </view>
+    </view>
+  </view>
+
+  <view class="section-content" wx:if="{{currentSection === 'stats'}}">
+    <view class="stats-grid flex-row">
+      <view class="stat-card card flex-column flex-center">
+        <text class="stat-value font-large font-bold primary-color">{{stats.totalWorks}}</text>
+        <text class="stat-label font-small text-secondary">作品总数</text>
+      </view>
+      <view class="stat-card card flex-column flex-center">
+        <text class="stat-value font-large font-bold primary-color">{{stats.totalTasks}}</text>
+        <text class="stat-label font-small text-secondary">任务完成</text>
+      </view>
+      <view class="stat-card card flex-column flex-center">
+        <text class="stat-value font-large font-bold primary-color">{{stats.avgScore}}</text>
+        <text class="stat-label font-small text-secondary">平均分数</text>
+      </view>
+    </view>
+  </view>
+</view>

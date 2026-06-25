@@ -1,0 +1,55 @@
+<view class="chat-assistant-container" wx:if="{{show}}">
+  <view class="chat-assistant-content">
+    <view class="chat-header flex-between">
+      <view class="header-left flex-row">
+        <text class="chat-icon font-medium">🤖</text>
+        <text class="chat-title font-medium font-bold text-primary">AI问答助手</text>
+      </view>
+      <view class="chat-close" bindtap="closeChat">✕</view>
+    </view>
+    
+    <view class="chat-messages">
+      <block wx:for="{{messages}}" wx:key="timestamp">
+        <view class="message-item {{item.role}}">
+          <view class="message-avatar">
+            <text class="avatar-icon font-small">{{item.role === 'user' ? '👤' : '🤖'}}</text>
+          </view>
+          <view class="message-content">
+            <text class="message-text font-small">{{item.content}}</text>
+            <text class="message-time font-small text-secondary">{{item.timestamp}}</text>
+          </view>
+        </view>
+      </block>
+      
+      <view class="loading-message" wx:if="{{isLoading}}">
+        <view class="loading-avatar">
+          <text class="avatar-icon font-small">🤖</text>
+        </view>
+        <view class="loading-content flex-row">
+          <text class="loading-text font-small text-secondary">AI正在思考...</text>
+          <view class="loading-dots flex-row">
+            <view class="dot"></view>
+            <view class="dot"></view>
+            <view class="dot"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="chat-input-section flex-row">
+      <input 
+        class="chat-input"
+        placeholder="输入问题..."
+        value="{{inputValue}}"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="sendMessage"
+      />
+      <button class="send-btn btn-primary font-small" bindtap="sendMessage">发送</button>
+    </view>
+    
+    <view class="chat-actions flex-between">
+      <button class="clear-btn font-small" bindtap="clearMessages">清空对话</button>
+    </view>
+  </view>
+</view>

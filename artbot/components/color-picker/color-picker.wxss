@@ -1,0 +1,181 @@
+/* ── 颜色选择器 · 文艺清新配色 ── */
+
+.color-picker-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(61, 61, 61, 0.4);
+  backdrop-filter: blur(4rpx);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.color-picker-content {
+  width: 82%;
+  max-width: 560rpx;
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx;
+  box-shadow: 0 8rpx 40rpx rgba(139, 123, 107, 0.15);
+  animation: pickerFadeIn 0.25s ease;
+}
+
+@keyframes pickerFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── 头部 ── */
+.picker-header {
+  margin-bottom: 32rpx;
+}
+
+.picker-title {
+  color: #3D3D3D;
+  font-weight: 600;
+}
+
+.picker-close {
+  font-size: 32rpx;
+  color: #B5A898;
+  padding: 8rpx;
+  transition: color 0.2s;
+}
+
+.picker-close:active {
+  color: #8B7B6B;
+}
+
+/* ── 颜色网格 ── */
+.color-grid {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+  padding: 8rpx 0;
+}
+
+.color-item {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 14rpx;
+  border: 3rpx solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+  box-shadow: 0 2rpx 8rpx rgba(139, 123, 107, 0.08);
+}
+
+.color-item:active {
+  transform: scale(0.92);
+}
+
+.color-item.selected {
+  border-color: #8B7B6B;
+  transform: scale(1.15);
+  box-shadow: 0 4rpx 16rpx rgba(139, 123, 107, 0.2);
+}
+
+.color-item.selected::after {
+  content: '✓';
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 14rpx;
+  background: #8B7B6B;
+  color: #FFFFFF;
+  font-size: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* ── 自定义颜色 ── */
+.custom-color-section {
+  margin-bottom: 28rpx;
+}
+
+.custom-label {
+  margin-bottom: 14rpx;
+  color: #3D3D3D;
+  font-weight: 500;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 20rpx 24rpx;
+  background-color: #F8F5F0;
+  border-radius: 14rpx;
+  border: 1rpx solid #EDE8E2;
+  font-size: 28rpx;
+  color: #3D3D3D;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.custom-input:focus {
+  border-color: #D4A574;
+  background-color: #FFFCF8;
+}
+
+.custom-input::placeholder {
+  color: #C5BFB6;
+}
+
+/* ── 预览区 ── */
+.preview-section {
+  text-align: center;
+  padding-top: 8rpx;
+}
+
+.preview-label {
+  margin-bottom: 14rpx;
+  color: #3D3D3D;
+  font-weight: 500;
+}
+
+.preview-color {
+  width: 100%;
+  height: 100rpx;
+  border-radius: 14rpx;
+  margin-top: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(139, 123, 107, 0.08);
+  transition: background-color 0.3s ease;
+}
+
+/* ── 底部按钮 ── */
+.picker-actions {
+  margin-top: 32rpx;
+}
+
+.picker-confirm-btn {
+  width: 100%;
+  padding: 22rpx;
+  border-radius: 14rpx;
+  background: linear-gradient(135deg, #8B7B6B 0%, #A49383 100%);
+  color: #FFFFFF;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+}
+
+.picker-confirm-btn::after {
+  border: none;
+}
+
+.picker-confirm-btn:active {
+  opacity: 0.85;
+}

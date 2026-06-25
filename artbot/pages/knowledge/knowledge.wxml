@@ -1,0 +1,51 @@
+<view class="knowledge-container">
+  <view class="search-section">
+    <input 
+      class="search-input"
+      placeholder="搜索知识卡片..."
+      bindinput="searchCards"
+      value="{{searchKeyword}}"
+    />
+  </view>
+
+  <view class="category-section">
+    <view class="category-tabs flex-row">
+      <view 
+        class="category-tab {{currentCategory === null ? 'active' : ''}}"
+        bindtap="selectCategory"
+        data-category-id="{{null}}">
+        <text>全部</text>
+      </view>
+      <block wx:for="{{categories}}" wx:key="categoryId">
+        <view 
+          class="category-tab {{currentCategory === item.categoryId ? 'active' : ''}}"
+          bindtap="selectCategory"
+          data-category-id="{{item.categoryId}}">
+          <text>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="cards-list">
+    <block wx:for="{{filteredCards}}" wx:key="cardId">
+      <view 
+        class="card-item card"
+        bindtap="openCard"
+        data-card-id="{{item.cardId}}">
+        <view class="card-header flex-between">
+          <text class="card-title font-medium font-bold text-primary">{{item.title}}</text>
+          <view class="card-category">
+            <text class="font-small text-secondary">{{item.categoryName}}</text>
+          </view>
+        </view>
+        
+        <text class="card-content font-small text-secondary">{{item.content}}</text>
+      </view>
+    </block>
+    <view wx:if="{{filteredCards.length === 0}}" class="empty-section">
+      <text class="empty-icon">📭</text>
+      <text class="empty-text">没有找到匹配的知识卡片</text>
+    </view>
+  </view>
+</view>

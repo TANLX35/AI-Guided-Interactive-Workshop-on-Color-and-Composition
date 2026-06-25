@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/sandbox/sandbox",
+    "pages/tasks/tasks",
+    "pages/task-detail/task-detail",
+    "pages/knowledge/knowledge",
+    "pages/profile/profile",
+    "pages/admin/admin",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F8F5F0",
+    "navigationBarTitleText": "色彩构图学习工坊",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#B5A898",
+    "selectedColor": "#8B7B6B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/sandbox/sandbox",
+        "text": "创作",
+        "iconPath": "images/sandbox.png",
+        "selectedIconPath": "images/sandbox-active.png"
+      },
+      {
+        "pagePath": "pages/tasks/tasks",
+        "text": "任务",
+        "iconPath": "images/tasks.png",
+        "selectedIconPath": "images/tasks-active.png"
+      },
+      {
+        "pagePath": "pages/knowledge/knowledge",
+        "text": "理论",
+        "iconPath": "images/knowledge.png",
+        "selectedIconPath": "images/knowledge-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-active.png"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

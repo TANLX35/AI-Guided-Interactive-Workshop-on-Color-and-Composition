@@ -1,0 +1,118 @@
+<view class="task-detail-container">
+  <view class="task-info card">
+    <view class="task-header flex-between">
+      <text class="task-name font-large font-bold text-primary">{{task.taskName}}</text>
+      <view class="task-difficulty {{task.difficulty}}">
+        <text class="font-small">{{task.difficulty}}</text>
+      </view>
+    </view>
+    
+    <text class="task-desc font-medium text-secondary margin-top">{{task.description}}</text>
+    
+    <view class="task-criteria margin-top">
+      <text class="criteria-title font-medium font-bold text-primary">评分标准:</text>
+      <block wx:for="{{task.criteria.items}}" wx:key="index">
+        <view class="criteria-item">
+          <text class="criteria-label font-small text-secondary">{{item.label}}</text>
+          <view class="criteria-grade">
+            <text class="grade-text font-small">{{item.grade}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="progress-section card" wx:if="{{userProgress}}">
+    <view class="progress-header flex-between">
+      <text class="font-medium font-bold text-primary">完成进度</text>
+      <text class="font-medium primary-color">{{userProgress.progress}}%</text>
+    </view>
+    <view class="progress-bar">
+      <view class="progress-fill bg-primary" style="width: {{userProgress.progress}}%"></view>
+    </view>
+    <view class="last-score" wx:if="{{userProgress.lastScore}}">
+      <text class="font-small text-secondary">上次得分: {{userProgress.lastScore}}分</text>
+    </view>
+  </view>
+
+  <view class="hints-section card">
+    <view class="hints-header flex-between">
+      <text class="font-medium font-bold text-primary">任务提示</text>
+      <button class="hints-btn btn-primary" bindtap="viewHints">查看提示</button>
+    </view>
+  </view>
+
+  <view class="action-section">
+    <button class="action-btn btn-primary font-medium" bindtap="startTask">
+      开始创作
+    </button>
+    <button class="action-btn btn-secondary font-medium margin-top" bindtap="showWorkSelector" disabled="{{isSubmitting}}">
+      {{isSubmitting ? '提交中...' : '选择作品提交'}}
+    </button>
+  </view>
+
+  <view class="evaluation-section card" wx:if="{{aiEvaluation}}">
+    <text class="evaluation-title font-medium font-bold text-primary">AI评价</text>
+    <view class="evaluation-content">
+      <view class="score-display flex-center">
+        <text class="score-number font-large font-bold primary-color">{{aiEvaluation.score}}</text>
+        <text class="score-unit font-medium text-secondary">分</text>
+      </view>
+      <text class="evaluation-comment font-medium text-secondary">{{aiEvaluation.comment}}</text>
+      
+      <view class="evaluation-details" wx:if="{{aiEvaluation.details}}">
+        <block wx:for="{{aiEvaluation.details}}" wx:key="label">
+          <view class="detail-item flex-between">
+            <text class="detail-label font-small text-secondary">{{item.label}}</text>
+            <text class="detail-score font-small primary-color">{{item.score}}分</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="work-selector-modal" wx:if="{{showSelector}}" bindtap="closeSelector">
+    <view class="modal-content" catchtap="onModalContentTap">
+      <view class="modal-header flex-between">
+        <text class="modal-title font-medium font-bold text-primary">选择作品提交</text>
+        <text class="modal-close" bindtap="closeSelector">✕</text>
+      </view>
+      
+      <scroll-view scroll-y class="works-scroll">
+        <view wx:if="{{userWorks.length > 0}}" class="works-list">
+          <view 
+            wx:for="{{userWorks}}" 
+            wx:key="workId" 
+            class="work-select-item {{selectedWorkId === item.workId ? 'selected' : ''}}"
+            bindtap="selectWork"
+            data-work-id="{{item.workId}}"
+          >
+            <canvas class="work-preview" canvas-id="previewCanvas{{index}}" style="width: 100rpx; height: 100rpx;"></canvas>
+            <view class="work-info">
+              <text class="work-name font-medium text-primary">{{item.workName || '未命名作品'}}</text>
+              <text class="work-date font-small text-secondary">{{item.formattedDate}}</text>
+            </view>
+            <view class="select-indicator">
+              <view class="radio" wx:if="{{selectedWorkId === item.workId}}">✓</view>
+            </view>
+          </view>
+        </view>
+        <view wx:else class="empty-works">
+          <text class="empty-icon">🖼️</text>
+          <text class="empty-text">暂无作品</text>
+          <button class="create-btn btn-primary" bindtap="goCreateWork">去创作</button>
+        </view>
+      </scroll-view>
+      
+      <view class="modal-footer">
+        <button 
+          class="submit-btn btn-primary font-medium" 
+          bindtap="confirmSubmit"
+          disabled="{{!selectedWorkId || isSubmitting}}"
+        >
+          {{isSubmitting ? '提交中...' : '确认提交'}}
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,258 @@
+/* ── 个人中心 · 文艺清新配色 ── */
+
+.container {
+  padding: 30rpx;
+  padding-bottom: 200rpx;
+  background-color: #F8F5F0;
+  min-height: 100vh;
+}
+
+/* ── 头部卡片 ── */
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 36rpx 30rpx;
+  background: linear-gradient(135deg, #8B7B6B 0%, #A49383 60%, #B5A898 100%);
+  border-radius: 24rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.profile-header::after {
+  content: '';
+  position: absolute;
+  right: -40rpx;
+  top: -60rpx;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.avatar-wrapper {
+  margin-right: 24rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 48rpx;
+  font-weight: 600;
+  border: 3rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.user-id {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-btn {
+  padding: 14rpx 32rpx;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  border: 1rpx solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  z-index: 10;
+  position: relative;
+}
+
+/* ── 统计卡片 ── */
+.stats-card {
+  display: flex;
+  justify-content: space-around;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 32rpx 24rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 16rpx rgba(139, 123, 107, 0.06);
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #8B7B6B;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #B5A898;
+}
+
+.stat-divider {
+  width: 1rpx;
+  background: #EDE8E2;
+  margin: 8rpx 0;
+}
+
+/* ── 分区 ── */
+.section {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 16rpx rgba(139, 123, 107, 0.06);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #3D3D3D;
+  margin-bottom: 24rpx;
+  padding-left: 16rpx;
+  border-left: 6rpx solid #D4A574;
+}
+
+/* ── 作品网格 ── */
+.works-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.work-item {
+  width: calc(33.33% - 14rpx);
+}
+
+.work-thumb {
+  width: 150rpx;
+  height: 150rpx;
+  background: #F5F2ED;
+  border-radius: 14rpx;
+  margin-bottom: 12rpx;
+}
+
+.work-name {
+  font-size: 24rpx;
+  color: #3D3D3D;
+  text-align: center;
+}
+
+/* ── 空状态 ── */
+.empty-section {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.empty-icon {
+  font-size: 64rpx;
+  margin-bottom: 16rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #B5A898;
+  margin-bottom: 20rpx;
+}
+
+.empty-action {
+  display: inline-block;
+  padding: 16rpx 40rpx;
+  background: linear-gradient(135deg, #8B7B6B 0%, #A49383 100%);
+  color: #FFFFFF;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+}
+
+/* ── 进度列表 ── */
+.progress-list {
+  padding-top: 10rpx;
+}
+
+.progress-item {
+  padding: 16rpx 0;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.progress-name {
+  font-size: 28rpx;
+  color: #3D3D3D;
+}
+
+.progress-percent {
+  font-size: 28rpx;
+  color: #8B7B6B;
+  font-weight: 600;
+}
+
+.progress-bar {
+  height: 10rpx;
+  background: #EDE8E2;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #A4B5A3 0%, #8B7B6B 100%);
+  border-radius: 5rpx;
+  transition: width 0.3s ease;
+}
+
+/* ── 菜单 ── */
+.menu-list {
+  padding-top: 10rpx;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #EDE8E2;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+
+.menu-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #3D3D3D;
+}
+
+.menu-arrow {
+  font-size: 28rpx;
+  color: #D5CFC7;
+}

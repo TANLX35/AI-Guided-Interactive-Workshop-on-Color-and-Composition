@@ -1,0 +1,152 @@
+<view class="settings-container">
+  <view class="settings-header">
+    <view class="header-back" bindtap="goBack">←</view>
+    <text class="header-title">设置</text>
+    <view class="header-placeholder"></view>
+  </view>
+
+  <view class="settings-content">
+    <view class="section">
+      <view class="section-title">用户账号</view>
+      
+      <view wx:if="{{user && user.nickname}}" class="card">
+        <view class="user-info">
+          <view class="avatar">{{user.nickname.charAt(0)}}</view>
+          <view class="user-details">
+            <text class="user-name">{{user.nickname}}</text>
+            <text class="user-id">用户ID: {{user.userId.slice(-8)}}</text>
+          </view>
+        </view>
+        <button class="logout-btn" bindtap="logout">退出登录</button>
+      </view>
+
+      <view wx:else class="card">
+        <text class="login-prompt">请登录或注册账号</text>
+        <view class="login-actions">
+          <button class="action-btn primary" bindtap="toggleLoginModal">登录/注册</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">AI配置</view>
+      
+      <view class="card">
+        <text class="config-label">当前模式</text>
+        <text class="config-value">{{aiConfig.provider === 'free' ? '免费模式' : aiConfig.provider === 'mock' ? '模拟模式' : aiConfig.provider === 'baidu' ? '百度千帆' : aiConfig.provider === 'aliyun' ? '阿里通义千问' : aiConfig.provider === 'tencent' ? '腾讯混元' : aiConfig.provider === 'openai' ? 'OpenAI' : '自定义API'}}</text>
+      </view>
+
+      <view class="card">
+        <text class="config-title">选择AI服务商</text>
+        <view class="provider-list">
+          <view 
+            wx:for="{{providers}}" 
+            wx:key="value"
+            class="provider-item {{aiConfig.provider === item.value ? 'active' : ''}}"
+            bindtap="switchAIProvider"
+            data-provider="{{item.value}}">
+            <text class="provider-label">{{item.label}}</text>
+            <text class="provider-desc">{{item.desc}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="card" wx:if="{{aiConfig.provider !== 'free' && aiConfig.provider !== 'mock'}}">
+        <text class="config-title">API Key</text>
+        <input 
+          class="config-input"
+          placeholder="请输入API Key"
+          value="{{aiConfig.apiKey}}"
+          bindinput="updateAIConfig"
+          data-field="apiKey"
+        />
+      </view>
+
+      <view class="card" wx:if="{{aiConfig.provider === 'openai' || aiConfig.provider === 'custom'}}">
+        <text class="config-title">Endpoint</text>
+        <input 
+          class="config-input"
+          placeholder="请输入API Endpoint"
+          value="{{aiConfig.endpoint}}"
+          bindinput="updateAIConfig"
+          data-field="endpoint"
+        />
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">系统设置</view>
+      
+      <view class="card">
+        <view class="setting-item" bindtap="toggleTTS">
+          <text class="setting-label">语音讲解</text>
+          <view class="setting-switch {{settings.ttsEnabled ? 'on' : ''}}">
+            <view class="switch-circle"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="card">
+        <view class="menu-list">
+          <view class="menu-item" bindtap="exportData">
+            <text class="menu-icon">📤</text>
+            <text class="menu-text">导出数据</text>
+          </view>
+          <view class="menu-item" bindtap="clearAllData">
+            <text class="menu-icon">🗑️</text>
+            <text class="menu-text">清空数据</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal-overlay" wx:if="{{showLoginModal}}" catchtouchmove="noop">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">{{loginMode === 'login' ? '用户登录' : '用户注册'}}</text>
+        <view class="modal-close" bindtap="toggleLoginModal">✕</view>
+      </view>
+      <view class="modal-body">
+        <view class="form-item">
+          <text class="form-label">昵称</text>
+          <input 
+            class="form-input"
+            placeholder="请输入昵称"
+            value="{{loginForm.nickname}}"
+            bindinput="onLoginInput"
+            data-field="nickname"
+            adjust-position="{{true}}"
+            cursor-spacing="20"
+            focus="{{inputFocus === 'nickname'}}"
+          />
+        </view>
+        <view class="form-item">
+          <text class="form-label">密码</text>
+          <input 
+            class="form-input"
+            type="text"
+            password="{{true}}"
+            placeholder="请输入密码"
+            value="{{loginForm.password}}"
+            bindinput="onLoginInput"
+            data-field="password"
+            adjust-position="{{true}}"
+            cursor-spacing="20"
+            focus="{{inputFocus === 'password'}}"
+          />
+        </view>
+        <view class="form-tip">注册即自动登录，请记住密码</view>
+      </view>
+      <view class="modal-footer">
+        <view wx:if="{{loginMode === 'register'}}" class="modal-footer-row">
+          <button class="modal-btn primary full" bindtap="register">注册</button>
+        </view>
+        <view wx:else class="modal-footer-row">
+          <button class="modal-btn secondary" bindtap="switchToRegister">去注册</button>
+          <button class="modal-btn primary" bindtap="login">登录</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

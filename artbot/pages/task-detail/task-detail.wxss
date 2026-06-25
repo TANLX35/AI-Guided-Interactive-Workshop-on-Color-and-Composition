@@ -1,0 +1,331 @@
+/* ── 任务详情 · 文艺清新配色 ── */
+
+.task-detail-container {
+  padding: 24rpx;
+  background-color: #F8F5F0;
+  min-height: 100vh;
+  padding-bottom: 160rpx;
+}
+
+/* ── 任务信息 ── */
+.task-info {
+  margin-bottom: 24rpx;
+}
+
+.task-header {
+  margin-bottom: 20rpx;
+}
+
+.task-difficulty {
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.task-difficulty.easy {
+  background-color: #EEF2EE;
+  color: #7A8F7A;
+}
+
+.task-difficulty.medium {
+  background-color: #FDF3E8;
+  color: #D4A574;
+}
+
+.task-difficulty.hard {
+  background-color: #FCE8E4;
+  color: #D4735E;
+}
+
+.task-desc {
+  line-height: 1.7;
+  font-size: 28rpx;
+  color: #3D3D3D;
+}
+
+/* ── 评分标准 ── */
+.task-criteria {
+  padding-top: 20rpx;
+  border-top: 1rpx solid #EDE8E2;
+}
+
+.criteria-title {
+  margin-bottom: 16rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #3D3D3D;
+}
+
+.criteria-item {
+  margin-bottom: 12rpx;
+  padding: 14rpx 18rpx;
+  background-color: #F8F5F0;
+  border-radius: 12rpx;
+  border-left: 4rpx solid #D4A574;
+}
+
+.criteria-label {
+  flex: 1;
+  font-size: 26rpx;
+  color: #3D3D3D;
+}
+
+.criteria-weight {
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color: #D4A574;
+  font-weight: 500;
+}
+
+/* ── 进度 ── */
+.progress-section {
+  margin-bottom: 24rpx;
+}
+
+.progress-header {
+  margin-bottom: 14rpx;
+}
+
+.progress-bar {
+  height: 10rpx;
+  background-color: #EDE8E2;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 5rpx;
+  background: linear-gradient(90deg, #A4B5A3 0%, #8B7B6B 100%);
+  transition: width 0.3s ease;
+}
+
+.last-score {
+  margin-top: 16rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #9B9B9B;
+}
+
+/* ── 提示 ── */
+.hints-section {
+  margin-bottom: 24rpx;
+}
+
+.hints-header {
+  align-items: center;
+}
+
+.hints-btn {
+  padding: 12rpx 32rpx;
+  font-size: 24rpx;
+  border-radius: 24rpx;
+}
+
+/* ── 操作区 ── */
+.action-section {
+  margin-bottom: 24rpx;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 28rpx;
+  font-size: 30rpx;
+}
+
+/* ── 评价区 ── */
+.evaluation-section {
+  margin-top: 24rpx;
+}
+
+.evaluation-title {
+  margin-bottom: 20rpx;
+}
+
+.evaluation-content {
+  padding-top: 20rpx;
+  border-top: 1rpx solid #EDE8E2;
+}
+
+.score-display {
+  margin-bottom: 20rpx;
+}
+
+.score-number {
+  font-size: 52rpx;
+  font-weight: 700;
+  margin-right: 12rpx;
+  color: #D4A574;
+}
+
+.evaluation-comment {
+  line-height: 1.7;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #3D3D3D;
+}
+
+.evaluation-details {
+  padding-top: 20rpx;
+  border-top: 1rpx solid #EDE8E2;
+}
+
+.detail-item {
+  margin-bottom: 12rpx;
+  padding: 12rpx 16rpx;
+  background-color: #F8F5F0;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+  color: #3D3D3D;
+}
+
+.criteria-grade {
+  background-color: #F8F5F0;
+  padding: 16rpx;
+  border-radius: 12rpx;
+  margin-top: 10rpx;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.grade-text {
+  color: #9B9B9B;
+  font-size: 26rpx;
+}
+
+/* ── 作品选择器弹窗 ── */
+.work-selector-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(61, 61, 61, 0.4);
+  backdrop-filter: blur(4rpx);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -4rpx 32rpx rgba(139, 123, 107, 0.12);
+}
+
+.modal-header {
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #3D3D3D;
+}
+
+.modal-close {
+  font-size: 36rpx;
+  color: #B5A898;
+  padding: 8rpx;
+}
+
+.works-scroll {
+  flex: 1;
+  max-height: 50vh;
+}
+
+.works-list {
+  padding-bottom: 20rpx;
+}
+
+.work-select-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-radius: 16rpx;
+  background: #F8F5F0;
+  margin-bottom: 16rpx;
+  transition: all 0.2s;
+}
+
+.work-select-item.selected {
+  background: #F5F2ED;
+  border: 2rpx solid #D4A574;
+}
+
+.work-preview {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 12rpx;
+  background: #EDE8E2;
+  margin-right: 20rpx;
+}
+
+.work-info {
+  flex: 1;
+}
+
+.work-name {
+  display: block;
+  margin-bottom: 8rpx;
+  font-size: 28rpx;
+  color: #3D3D3D;
+}
+
+.select-indicator {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #D5CFC7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-select-item.selected .select-indicator {
+  background: #D4A574;
+  border-color: #D4A574;
+}
+
+.radio {
+  color: #FFFFFF;
+  font-size: 24rpx;
+}
+
+.empty-works {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #B5A898;
+  margin-bottom: 20rpx;
+}
+
+.create-btn {
+  padding: 20rpx 60rpx;
+}
+
+.modal-footer {
+  margin-top: 24rpx;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 24rpx;
+  font-size: 30rpx;
+}

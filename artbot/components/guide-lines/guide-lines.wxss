@@ -1,0 +1,136 @@
+/* ── 构图参考线 · 文艺清新配色 ── */
+
+.guide-lines-container {
+  margin-bottom: 20rpx;
+}
+
+/* ── 类型选择器 ── */
+.guide-lines-selector {
+  background-color: #FFFFFF;
+  padding: 10rpx 8rpx;
+  border-radius: 20rpx;
+  justify-content: space-around;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(139, 123, 107, 0.05);
+}
+
+.guide-option {
+  padding: 12rpx 24rpx;
+  border-radius: 28rpx;
+  background-color: #F5F2ED;
+  color: #B5A898;
+  font-size: 24rpx;
+  transition: all 0.25s ease;
+  font-weight: 500;
+}
+
+.guide-option:active {
+  transform: scale(0.95);
+}
+
+.guide-option.active {
+  background: linear-gradient(135deg, #8B7B6B 0%, #A49383 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 12rpx rgba(139, 123, 107, 0.2);
+}
+
+/* ── 参考线显示区域 ── */
+.guide-lines-display {
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 16rpx rgba(139, 123, 107, 0.06);
+}
+
+/* ── 参考线基础样式 ── */
+.guide-line {
+  position: absolute;
+  background-color: rgba(212, 165, 116, 0.45);
+}
+
+/* ── 三分法 ── */
+.guide-thirds .guide-line {
+  width: 2rpx;
+  height: 2rpx;
+}
+
+.guide-thirds .vertical {
+  width: 1rpx;
+  height: 100%;
+  background-color: rgba(212, 165, 116, 0.35);
+}
+
+.guide-thirds .horizontal {
+  width: 100%;
+  height: 1rpx;
+  background-color: rgba(212, 165, 116, 0.35);
+}
+
+.guide-thirds .line-1 {
+  left: 33.33%;
+}
+
+.guide-thirds .line-2 {
+  left: 66.66%;
+}
+
+.guide-thirds .horizontal.line-1 {
+  top: 33.33%;
+  left: 0;
+}
+
+.guide-thirds .horizontal.line-2 {
+  top: 66.66%;
+  left: 0;
+}
+
+/* ── 黄金螺旋 ── */
+.guide-golden .guide-spiral {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,0 Q25,0 25,25 T50,50 T75,75 T100,100" stroke="rgba(212,165,116,0.45)" fill="none" stroke-width="1.5"/></svg>');
+  background-size: cover;
+  opacity: 0.7;
+}
+
+/* ── 对角线 ── */
+.guide-diagonal .guide-line {
+  width: 100%;
+  height: 1rpx;
+  transform-origin: center;
+  background-color: rgba(164, 181, 163, 0.4);
+}
+
+.guide-diagonal .diagonal-1 {
+  transform: rotate(45deg);
+  top: 50%;
+  left: 0;
+}
+
+.guide-diagonal .diagonal-2 {
+  transform: rotate(-45deg);
+  top: 50%;
+  left: 0;
+}
+
+/* ── 对称线 ── */
+.guide-symmetry .guide-line.center {
+  width: 1rpx;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  background-color: rgba(164, 181, 163, 0.4);
+}
+
+/* ── 无参考线时占位 ── */
+.guide-none-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #D5CFC7;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+}
